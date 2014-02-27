@@ -5,6 +5,8 @@ using System.Text;
 
 namespace ClassLibrary.Stack
 {
+
+    #region 3.1 Solution two
     /* StackData is a simple class that holds a set of data about each
    / * stack. It does not hold the actual items in the stack. */
     public class StackData
@@ -157,3 +159,4 @@ namespace ClassLibrary.Stack
         
     }
 }
+    #endregion 

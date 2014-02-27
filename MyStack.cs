@@ -16,6 +16,8 @@ namespace Algorithm_Stack
             value = n;
         }
     }
+
+    #region 3.1
     // Describe how you could use a single array to implement three stacks
     public class MyStack<T>
     {
@@ -69,11 +71,8 @@ namespace Algorithm_Stack
             return stackNum * stackSize + stackPointer[stackNum];
         }
 
-
+    #endregion 3.1
         public MyStack(int capacity) { this.capacity = capacity; }
-
-
-
         public void Join(Node<T> above, Node<T> below)
         {
             if (below != null) below.above = above;
