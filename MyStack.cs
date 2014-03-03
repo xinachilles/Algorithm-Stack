@@ -120,7 +120,7 @@ namespace Algorithm_Stack
 
         }
 
-
+        #region 3.6
 
         //Write a program to sort a stack in ascending order (with biggest items on top).
         //You may use at most one additional stack to hold items, but you may not copy the
@@ -143,5 +143,6 @@ namespace Algorithm_Stack
             }
             return r;
         }
+        #endregion
     }
 }

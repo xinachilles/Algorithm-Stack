@@ -19,16 +19,25 @@ namespace ClassLibrary.Stack
             value = n;
         }
     }
-   
+
+    #region 3.3-2
+    //FOLLOW UP
+    //Implement a function popAt(int index) which performs a pop operation on a
+    //specific sub-stack.
     public class StackWithCapacity<T> :List<Node<T>>
     {
 
         List<StackWithCapacity<T>> stacks = new List<StackWithCapacity<T>>();
         public Node<T> top, bottom;
         private int capacity;
+        private int size;
 
-        public StackWithCapacity(int capacity) { this.capacity = capacity; }
+        public StackWithCapacity(int c)
+    {
+        capacity = c; 
+    }
 
+       
 
 
         public void Join(Node<T> above, Node<T> below)
@@ -37,17 +46,20 @@ namespace ClassLibrary.Stack
             if (above != null) above.below = below;
         }
 
-        public void Push(T v)
+        public bool Push(T v)
         {
-            if (base.Count < capacity)
+            if (size >= capacity)
             {
-
+                return false;
+            }
+                size ++;
                 Node<T> n = new Node<T>(v);
                 if (base.Count == 1) bottom = n;
                 Join(n, top);
                 top = n;
                 base.Add(n);
-            }
+                return true;
+            
         }
 
         public T Pop()
@@ -55,30 +67,42 @@ namespace ClassLibrary.Stack
             Node<T> t = top;
             if (top != null)
             {
+                size--;
                 top = top.below;
                 base.RemoveAt(Count - 1);
-            }
                 return t.value;
+            }
+            else {
+                return default(T);
             
+            }
+                            
         }
 
         public bool IsEmpty()
         {
-            return base.Count == 0;
+            return size == 0;
         }
 
         public bool IsFull()
         {
-            if (base.Count >= capacity) { return true; }
-            else { return false; }
+            return capacity == size;
         }
 
         public T RemoveBottom()
         {
             Node<T> b = bottom;
-            bottom = bottom.above;
-            if (bottom != null) bottom.below = null;
-            return b.value;
+            if (bottom != null)
+            {
+                bottom = bottom.above;
+                bottom.below = null;
+                size--;
+                return b.value;
+            }
+            else {
+
+                return default(T);
+            }
 
         }
         public T PopAt(int index)
@@ -95,7 +119,7 @@ namespace ClassLibrary.Stack
             if (removeTop) removed_item = stack.Pop();
             else removed_item = stack.RemoveBottom();
 
-            if (stack.Count == 0)
+            if (stack.IsEmpty())
             {
                 stacks.RemoveAt(index);
             }
@@ -107,7 +131,7 @@ namespace ClassLibrary.Stack
             return removed_item;
         }
 
-
+    #endregion
 
         //Write a program to sort a stack in ascending order (with biggest items on top).
         //You may use at most one additional stack to hold items, but you may not copy the
@@ -141,9 +165,7 @@ namespace ClassLibrary.Stack
     //pop () should behave identically to a single stack (that is, pop () should return the
     //same values as it would if there were just a single stack).
 
-    //FOLLOW UP
-    //Implement a function popAt(int index) which performs a pop operation on a
-    //specific sub-stack.
+
 
     class SetOfStacks<T>
     {
